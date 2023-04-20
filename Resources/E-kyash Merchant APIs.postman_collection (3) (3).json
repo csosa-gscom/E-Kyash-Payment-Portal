@@ -1,0 +1,2375 @@
+{
+	"info": {
+		"_postman_id": "001f6e6e-98eb-432a-aa40-e887916ae3bc",
+		"name": "E-kyash Merchant APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "App QR PoS (3rd party Merchants)",
+			"item": [
+				{
+					"name": "API",
+					"item": [
+						{
+							"name": "Authorization",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    var response = pm.response.json();",
+											"    if(typeof response.session !== 'undefined') {",
+											"        pm.environment.set(\"pos_session\", response.session);",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{LANG}}"
+									},
+									{
+										"key": "The-Timezone-IANA",
+										"type": "text",
+										"value": "{{TimeZone}}"
+									},
+									{
+										"key": "WL",
+										"type": "text",
+										"value": "{{WL}}"
+									},
+									{
+										"key": "IMEI",
+										"type": "text",
+										"value": "{{IMEI}}"
+									},
+									{
+										"key": "appVersion",
+										"type": "text",
+										"value": "{{VERMOB}}"
+									},
+									{
+										"key": "operatingSystem",
+										"type": "text",
+										"value": "{{OS}}"
+									},
+									{
+										"key": "SID",
+										"value": "{{sid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sid\": \"{{sid}}\",\n    \"pinHash\": \"{{pin_hash}}\",\n    \"pushkey\": \"{{pushkey}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/authorization",
+									"host": [
+										"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+									],
+									"path": [
+										"authorization"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Authorization - Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"sid\": \"{{sid}}\",\n    \"pinHash\": \"{{pin_hash}}\",\n    \"pushkey\": \"{{pushkey}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/authorization",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"authorization"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Tue, 12 Jan 2021 12:17:21 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.3.9 mod_perl/2.0.8-dev Perl/v5.16.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Authorization"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Origin, X-Requested-With, Content-Type, Accept"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										},
+										{
+											"key": "Content-Length",
+											"value": "128"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5, max=100"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"session\": \"fba44eeb993fe5d599422495e031ec88\",\n    \"firstName\": \"Test\",\n    \"lastName\": \"Personnel\",\n    \"mobile\": \"380777777777\",\n    \"settings\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "CreateNewInvoice",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    var response = pm.response.json();",
+											"    if(typeof response.invoiceId !== 'undefined') {",
+											"        pm.environment.set(\"invoiceId\", response.invoiceId);",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{LANG}}"
+									},
+									{
+										"key": "The-Timezone-IANA",
+										"type": "text",
+										"value": "{{TimeZone}}"
+									},
+									{
+										"key": "WL",
+										"type": "text",
+										"value": "{{WL}}"
+									},
+									{
+										"key": "IMEI",
+										"type": "text",
+										"value": "{{IMEI}}"
+									},
+									{
+										"key": "appVersion",
+										"type": "text",
+										"value": "{{VERMOB}}"
+									},
+									{
+										"key": "operatingSystem",
+										"type": "text",
+										"value": "{{OS}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"orderId\": \"4w44ds5r90\",\n    \"amount\": 1000,\n    \"currency\": \"{{currency}}\",\n    \"description\": \"Test invoice\",\n    \"payer\": \"380777777771\",\n    \"longTerm\": false,\n    \"receipt\": null,\n    \"dateLife\": null,\n    \"fieldsOther\": null,\n    \"fieldsApp\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/create-new-invoice",
+									"host": [
+										"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+									],
+									"path": [
+										"create-new-invoice"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "CreateNewInvoice - Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"orderId\": \"12345\",\n    \"amount\": 100,\n    \"currency\": \"{{currency}}\",\n    \"description\": \"Test invoice\",\n    \"payer\": null,\n    \"longTerm\": false,\n    \"receipt\": null,\n    \"dateLife\": null,\n    \"otherFields\": null,\n    \"appFields\": null\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/create-new-invoice",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"create-new-invoice"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Tue, 12 Jan 2021 13:53:12 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.3.9 mod_perl/2.0.8-dev Perl/v5.16.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Authorization"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Origin, X-Requested-With, Content-Type, Accept"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										},
+										{
+											"key": "Content-Length",
+											"value": "128"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5, max=100"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"invoiceId\": \"368050143849\",\n    \"qrUrl\": \"http://local.wlbase/qr/invoice/368050143849/L/5\",\n    \"qrData\": \"368050143849\",\n    \"receiptUrl\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "GetInfoUserByMyQr",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{LANG}}"
+									},
+									{
+										"key": "The-Timezone-IANA",
+										"type": "text",
+										"value": "{{TimeZone}}"
+									},
+									{
+										"key": "WL",
+										"type": "text",
+										"value": "{{WL}}"
+									},
+									{
+										"key": "IMEI",
+										"type": "text",
+										"value": "{{IMEI}}"
+									},
+									{
+										"key": "appVersion",
+										"type": "text",
+										"value": "{{VERMOB}}"
+									},
+									{
+										"key": "operatingSystem",
+										"type": "text",
+										"value": "{{OS}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"userId\": \"404491019\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/get-info-user-by-myqr",
+									"host": [
+										"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+									],
+									"path": [
+										"get-info-user-by-myqr"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetInfoUserByMyQr",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"userId\": \"777777777\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/get-info-user-by-myqr",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"get-info-user-by-myqr"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Wed, 13 Jan 2021 07:49:03 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.3.9 mod_perl/2.0.8-dev Perl/v5.16.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Authorization"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Origin, X-Requested-With, Content-Type, Accept"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										},
+										{
+											"key": "Content-Length",
+											"value": "77"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5, max=100"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"firstName\": \"Vitalii\",\n    \"lastName\": \"Kurshynov\",\n    \"mobile\": \"380777777777\",\n    \"email\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "GetPushHistory",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{LANG}}"
+									},
+									{
+										"key": "The-Timezone-IANA",
+										"type": "text",
+										"value": "{{TimeZone}}"
+									},
+									{
+										"key": "WL",
+										"type": "text",
+										"value": "{{WL}}"
+									},
+									{
+										"key": "IMEI",
+										"type": "text",
+										"value": "{{IMEI}}"
+									},
+									{
+										"key": "appVersion",
+										"type": "text",
+										"value": "{{VERMOB}}"
+									},
+									{
+										"key": "operatingSystem",
+										"type": "text",
+										"value": "{{OS}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"dateStart\": null,\n    \"dateEnd\": null,\n    \"page\": null,\n    \"rows\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/get-push-history",
+									"host": [
+										"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+									],
+									"path": [
+										"get-push-history"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetPushHistory - Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"dateStart\": null,\n    \"dateEnd\": null,\n    \"page\": null,\n    \"rows\": null\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/get-push-history",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"get-push-history"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Wed, 13 Jan 2021 08:10:44 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.3.9 mod_perl/2.0.8-dev Perl/v5.16.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Authorization"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Origin, X-Requested-With, Content-Type, Accept"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										},
+										{
+											"key": "Content-Length",
+											"value": "11"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5, max=100"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"list\": [\n        {\n            \"pushId\": \"4613e8694ae9d1dd919ed714bd38b76a\",\n            \"dateTime\": \"2021-01-11 18:31:52\",\n            \"message\": \"User Vitalii Kurshynov has made a payment to your wallet. 10 USD Beer\",\n            \"data\": {\n                \"type\": \"p2p.receive\",\n                \"currency\": \"USD\",\n                \"amount\": 1000,\n                \"message\": \"User Vitalii Kurshynov has made a payment to your wallet. 10 USD Beer\",\n                \"sender\": \"380777777777\",\n                \"description\": \"Beer\",\n                \"notification_title\": \"Transfer\",\n                \"notification_body\": \"User Vitalii Kurshynov has made a payment to your wallet. 10 USD Beer\"\n            }\n        },\n        {\n            \"pushId\": \"daa0f554cbf2ab7c6eeef490958006f2\",\n            \"dateTime\": \"2021-01-11 18:12:16\",\n            \"message\": \"Hello, I`m test push!\",\n            \"data\": {\n                \"type\": \"info\",\n                \"msg\": \"Hello, I`m test push!\",\n                \"notification_title\": \"Test push\",\n                \"notification_body\": \"Hello, I`m test push!\"\n            }\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "GetInvoicesList",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{LANG}}"
+									},
+									{
+										"key": "The-Timezone-IANA",
+										"type": "text",
+										"value": "{{TimeZone}}"
+									},
+									{
+										"key": "WL",
+										"type": "text",
+										"value": "{{WL}}"
+									},
+									{
+										"key": "IMEI",
+										"type": "text",
+										"value": "{{IMEI}}"
+									},
+									{
+										"key": "appVersion",
+										"type": "text",
+										"value": "{{VERMOB}}"
+									},
+									{
+										"key": "operatingSystem",
+										"type": "text",
+										"value": "{{OS}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"statusesPay\": [3],\n    \"invoiceTypes\": [1],\n    \"search\": null,\n    \"dateStart\": null,\n    \"dateEnd\": null,\n    \"page\": null,\n    \"rows\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/get-invoices-list",
+									"host": [
+										"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+									],
+									"path": [
+										"get-invoices-list"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "GetInvoicesList - Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"statusesPay\": [3],\n    \"invoiceTypes\": [1],\n    \"search\": null,\n    \"dateStart\": null,\n    \"dateEnd\": null,\n    \"page\": null,\n    \"rows\": null\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/get-invoices-list",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"get-invoices-list"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 04 Feb 2021 12:21:34 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.3.9 mod_perl/2.0.8-dev Perl/v5.16.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Authorization"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, HEAD, OPTIONS, POST"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Accept-Language, The-Timezone-IANA, Authorization, Access-Control-Allow-Headers, X-Requested-With, WL, IMEI, appVersion, operatingSystem"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										},
+										{
+											"key": "Content-Length",
+											"value": "5134"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5, max=98"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"list\": [\n        {\n            \"createdAt\": \"2021-02-03 11:39:08\",\n            \"dateLife\": null,\n            \"merchantId\": \"1111111111\",\n            \"merchantName\": \"System Merchant\",\n            \"invoiceId\": \"723348257195\",\n            \"parentId\": null,\n            \"invoiceType\": 1,\n            \"orderId\": \"4w44w2ds95900\",\n            \"amount\": 1000,\n            \"amountFee\": 0,\n            \"currency\": \"USD\",\n            \"currencyMask\": \"$\",\n            \"description\": \"Test invoice\",\n            \"statusPay\": 3,\n            \"statusPayName\": \"approved\",\n            \"userPayeeId\": null,\n            \"payeeMobile\": null,\n            \"payeeFirstName\": null,\n            \"payeeLastName\": null,\n            \"userPayerId\": \"777777777\",\n            \"payerMobile\": \"380777777777\",\n            \"payerFirstName\": \"Vitalii\",\n            \"payerLastName\": \"Kurshynov\",\n            \"receipt\": null,\n            \"fieldsOther\": null,\n            \"fieldsApp\": null,\n            \"transactions\": [\n                {\n                    \"createdAt\": \"2021-02-03 11:39:15\",\n                    \"datePay\": \"2021-02-03 11:39:50\",\n                    \"datePayPrev\": \"2021-02-03 11:39:50\",\n                    \"transactionId\": \"843103001715\",\n                    \"transactionType\": \"P2M\",\n                    \"amount\": 1000,\n                    \"amountPrev\": 0,\n                    \"amountTips\": 0,\n                    \"amountFee\": 0,\n                    \"currency\": \"USD\",\n                    \"currencyMask\": \"$\",\n                    \"paymentId\": 2,\n                    \"invoiceId\": \"723348257195\",\n                    \"description\": \"Test invoice\",\n                    \"statusPay\": 3,\n                    \"statusPayName\": \"approved\",\n                    \"transactionAction\": null,\n                    \"operationIdFirst\": \"601a6f6668c771.99557355\",\n                    \"operationIdSecond\": null,\n                    \"fieldsOther\": null,\n                    \"fieldsApp\": null,\n                    \"userPayeeId\": null,\n                    \"payeeMobile\": null,\n                    \"payeeFirstName\": null,\n                    \"payeeLastName\": null,\n                    \"userPayerId\": \"777777777\",\n                    \"payerMobile\": \"380777777777\",\n                    \"payerFirstName\": \"Vitalii\",\n                    \"payerLastName\": \"Kurshynov\"\n                }\n            ]\n        },\n        {\n            \"createdAt\": \"2021-02-03 09:06:13\",\n            \"dateLife\": null,\n            \"merchantId\": \"1111111111\",\n            \"merchantName\": \"System Merchant\",\n            \"invoiceId\": \"478071220054\",\n            \"parentId\": null,\n            \"invoiceType\": 1,\n            \"orderId\": \"4w44w2ds590\",\n            \"amount\": 1000,\n            \"amountFee\": 0,\n            \"currency\": \"USD\",\n            \"currencyMask\": \"$\",\n            \"description\": \"Test invoice\",\n            \"statusPay\": 3,\n            \"statusPayName\": \"approved\",\n            \"userPayeeId\": null,\n            \"payeeMobile\": null,\n            \"payeeFirstName\": null,\n            \"payeeLastName\": null,\n            \"userPayerId\": \"777777777\",\n            \"payerMobile\": \"380777777777\",\n            \"payerFirstName\": \"Vitalii\",\n            \"payerLastName\": \"Kurshynov\",\n            \"receipt\": null,\n            \"fieldsOther\": null,\n            \"fieldsApp\": null,\n            \"transactions\": [\n                {\n                    \"createdAt\": \"2021-02-03 09:06:15\",\n                    \"datePay\": \"2021-02-03 09:29:06\",\n                    \"datePayPrev\": \"2021-02-03 09:29:06\",\n                    \"transactionId\": \"524042053646\",\n                    \"transactionType\": \"P2M\",\n                    \"amount\": 1000,\n                    \"amountPrev\": 0,\n                    \"amountTips\": 0,\n                    \"amountFee\": 0,\n                    \"currency\": \"USD\",\n                    \"currencyMask\": \"$\",\n                    \"paymentId\": 2,\n                    \"invoiceId\": \"478071220054\",\n                    \"description\": \"Test invoice\",\n                    \"statusPay\": 3,\n                    \"statusPayName\": \"approved\",\n                    \"transactionAction\": null,\n                    \"operationIdFirst\": \"601a50c2362fd9.44830512\",\n                    \"operationIdSecond\": null,\n                    \"fieldsOther\": null,\n                    \"fieldsApp\": null,\n                    \"userPayeeId\": null,\n                    \"payeeMobile\": null,\n                    \"payeeFirstName\": null,\n                    \"payeeLastName\": null,\n                    \"userPayerId\": \"777777777\",\n                    \"payerMobile\": \"380777777777\",\n                    \"payerFirstName\": \"Vitalii\",\n                    \"payerLastName\": \"Kurshynov\"\n                }\n            ]\n        },\n        {\n            \"createdAt\": \"2021-02-03 08:47:34\",\n            \"dateLife\": null,\n            \"merchantId\": \"1111111111\",\n            \"merchantName\": \"System Merchant\",\n            \"invoiceId\": \"597389654925\",\n            \"parentId\": null,\n            \"invoiceType\": 1,\n            \"orderId\": \"41w44w2ds590\",\n            \"amount\": 1000,\n            \"amountFee\": 0,\n            \"currency\": \"USD\",\n            \"currencyMask\": \"$\",\n            \"description\": \"Test invoice\",\n            \"statusPay\": 3,\n            \"statusPayName\": \"approved\",\n            \"userPayeeId\": null,\n            \"payeeMobile\": null,\n            \"payeeFirstName\": null,\n            \"payeeLastName\": null,\n            \"userPayerId\": \"777777777\",\n            \"payerMobile\": \"380777777777\",\n            \"payerFirstName\": \"Vitalii\",\n            \"payerLastName\": \"Kurshynov\",\n            \"receipt\": null,\n            \"fieldsOther\": null,\n            \"fieldsApp\": null,\n            \"transactions\": [\n                {\n                    \"createdAt\": \"2021-02-03 08:47:37\",\n                    \"datePay\": \"2021-02-03 08:51:16\",\n                    \"datePayPrev\": \"2021-02-03 08:51:16\",\n                    \"transactionId\": \"795966205405\",\n                    \"transactionType\": \"P2M\",\n                    \"amount\": 1000,\n                    \"amountPrev\": 0,\n                    \"amountTips\": 0,\n                    \"amountFee\": 0,\n                    \"currency\": \"USD\",\n                    \"currencyMask\": \"$\",\n                    \"paymentId\": 2,\n                    \"invoiceId\": \"597389654925\",\n                    \"description\": \"Test invoice\",\n                    \"statusPay\": 3,\n                    \"statusPayName\": \"approved\",\n                    \"transactionAction\": null,\n                    \"operationIdFirst\": \"601a47e434dab6.26195210\",\n                    \"operationIdSecond\": null,\n                    \"fieldsOther\": null,\n                    \"fieldsApp\": null,\n                    \"userPayeeId\": null,\n                    \"payeeMobile\": null,\n                    \"payeeFirstName\": null,\n                    \"payeeLastName\": null,\n                    \"userPayerId\": \"777777777\",\n                    \"payerMobile\": \"380777777777\",\n                    \"payerFirstName\": \"Vitalii\",\n                    \"payerLastName\": \"Kurshynov\"\n                }\n            ]\n        },\n        {\n            \"createdAt\": \"2021-02-02 20:48:52\",\n            \"dateLife\": null,\n            \"merchantId\": \"1111111111\",\n            \"merchantName\": \"System Merchant\",\n            \"invoiceId\": \"534467844610\",\n            \"parentId\": null,\n            \"invoiceType\": 1,\n            \"orderId\": \"41w44w2d590\",\n            \"amount\": 1000,\n            \"amountFee\": 0,\n            \"currency\": \"USD\",\n            \"currencyMask\": \"$\",\n            \"description\": \"Test invoice\",\n            \"statusPay\": 3,\n            \"statusPayName\": \"approved\",\n            \"userPayeeId\": null,\n            \"payeeMobile\": null,\n            \"payeeFirstName\": null,\n            \"payeeLastName\": null,\n            \"userPayerId\": \"777777777\",\n            \"payerMobile\": \"380777777777\",\n            \"payerFirstName\": \"Vitalii\",\n            \"payerLastName\": \"Kurshynov\",\n            \"receipt\": null,\n            \"fieldsOther\": null,\n            \"fieldsApp\": null,\n            \"transactions\": [\n                {\n                    \"createdAt\": \"2021-02-02 20:48:56\",\n                    \"datePay\": \"2021-02-02 20:49:21\",\n                    \"datePayPrev\": \"2021-02-02 20:49:21\",\n                    \"transactionId\": \"148953605227\",\n                    \"transactionType\": \"P2M\",\n                    \"amount\": 1000,\n                    \"amountPrev\": 0,\n                    \"amountTips\": 0,\n                    \"amountFee\": 0,\n                    \"currency\": \"USD\",\n                    \"currencyMask\": \"$\",\n                    \"paymentId\": 2,\n                    \"invoiceId\": \"534467844610\",\n                    \"description\": \"Test invoice\",\n                    \"statusPay\": 3,\n                    \"statusPayName\": \"approved\",\n                    \"transactionAction\": null,\n                    \"operationIdFirst\": \"60199eb1c72c64.86170025\",\n                    \"operationIdSecond\": null,\n                    \"fieldsOther\": null,\n                    \"fieldsApp\": null,\n                    \"userPayeeId\": null,\n                    \"payeeMobile\": null,\n                    \"payeeFirstName\": null,\n                    \"payeeLastName\": null,\n                    \"userPayerId\": \"777777777\",\n                    \"payerMobile\": \"380777777777\",\n                    \"payerFirstName\": \"Vitalii\",\n                    \"payerLastName\": \"Kurshynov\"\n                }\n            ]\n        }\n    ],\n    \"page\": 1,\n    \"rows\": 10,\n    \"count\": 4\n}"
+								}
+							]
+						},
+						{
+							"name": "CancelInvoice",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{LANG}}"
+									},
+									{
+										"key": "The-Timezone-IANA",
+										"type": "text",
+										"value": "{{TimeZone}}"
+									},
+									{
+										"key": "WL",
+										"type": "text",
+										"value": "{{WL}}"
+									},
+									{
+										"key": "IMEI",
+										"type": "text",
+										"value": "{{IMEI}}"
+									},
+									{
+										"key": "appVersion",
+										"type": "text",
+										"value": "{{VERMOB}}"
+									},
+									{
+										"key": "operatingSystem",
+										"type": "text",
+										"value": "{{OS}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"invoiceId\": \"{{invoiceId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/cancel-invoice",
+									"host": [
+										"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+									],
+									"path": [
+										"cancel-invoice"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "CancelInvoice - Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"invoiceId\": \"{{invoiceId}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/cancel-invoice",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"cancel-invoice"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Jan 2021 15:00:18 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.3.9 mod_perl/2.0.8-dev Perl/v5.16.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Authorization"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Origin, X-Requested-With, Content-Type, Accept"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										},
+										{
+											"key": "Content-Length",
+											"value": "16"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5, max=100"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true\n}"
+								},
+								{
+									"name": "CancelInvoice - Fail",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"invoiceId\": \"{{invoiceId}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/cancel-invoice",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"cancel-invoice"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Jan 2021 13:46:58 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.3.9 mod_perl/2.0.8-dev Perl/v5.16.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Authorization"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Origin, X-Requested-With, Content-Type, Accept"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1717"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5, max=100"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": {\n        \"code\": -1014,\n        \"message\": \"Invoice can not be canceled\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "RefundTransaction",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{LANG}}"
+									},
+									{
+										"key": "The-Timezone-IANA",
+										"type": "text",
+										"value": "{{TimeZone}}"
+									},
+									{
+										"key": "WL",
+										"type": "text",
+										"value": "{{WL}}"
+									},
+									{
+										"key": "IMEI",
+										"type": "text",
+										"value": "{{IMEI}}"
+									},
+									{
+										"key": "appVersion",
+										"type": "text",
+										"value": "{{VERMOB}}"
+									},
+									{
+										"key": "operatingSystem",
+										"type": "text",
+										"value": "{{OS}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"transactionId\": \"{{transactionId}}\",\n    \"amount\": 100,\n    \"pinHash\": \"{{pin_hash}}\",\n    \"refundReason\": \"Took extra money\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/refund-transaction",
+									"host": [
+										"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+									],
+									"path": [
+										"refund-transaction"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "RefundTransaction - Fail",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"transactionId\": \"{{transactionId}}\",\n    \"amount\": 100,\n    \"pinHash\": \"{{pin_hash}}\",\n    \"refundReason\": \"Took extra money\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/refund-transaction",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"refund-transaction"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 21 Jan 2021 08:15:22 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.3.9 mod_perl/2.0.8-dev Perl/v5.16.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Authorization"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, HEAD, OPTIONS, POST"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Accept-Language, The-Timezone-IANA, Authorization, Access-Control-Allow-Headers, X-Requested-With, WL, IMEI, appVersion, operatingSystem"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1954"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5, max=100"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": {\n        \"code\": -1015,\n        \"message\": \"The transaction has already been canceled! Create a new\"\n    }\n}"
+								},
+								{
+									"name": "RefundTransaction - Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"transactionId\": \"{{transactionId}}\",\n    \"amount\": 100,\n    \"pinHash\": \"{{pin_hash}}\",\n    \"refundReason\": \"Took extra money\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/refund-transaction",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"refund-transaction"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 21 Jan 2021 08:14:37 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Apache/2.4.41 (Unix) OpenSSL/1.1.1c PHP/7.3.9 mod_perl/2.0.8-dev Perl/v5.16.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Authorization"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, HEAD, OPTIONS, POST"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Accept-Language, The-Timezone-IANA, Authorization, Access-Control-Allow-Headers, X-Requested-With, WL, IMEI, appVersion, operatingSystem"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										},
+										{
+											"key": "Content-Length",
+											"value": "16"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5, max=98"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true\n}"
+								}
+							]
+						},
+						{
+							"name": "InvoiceInfo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{LANG}}"
+									},
+									{
+										"key": "The-Timezone-IANA",
+										"type": "text",
+										"value": "{{TimeZone}}"
+									},
+									{
+										"key": "WL",
+										"type": "text",
+										"value": "{{WL}}"
+									},
+									{
+										"key": "IMEI",
+										"type": "text",
+										"value": "{{IMEI}}"
+									},
+									{
+										"key": "appVersion",
+										"type": "text",
+										"value": "{{VERMOB}}"
+									},
+									{
+										"key": "operatingSystem",
+										"type": "text",
+										"value": "{{OS}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"invoiceId\": \"{{invoiceId}}\",\n    \"orderId\": \"null\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/get-invoice-info",
+									"host": [
+										"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+									],
+									"path": [
+										"get-invoice-info"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "InvoiceInfo",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"session\": \"{{pos_session}}\",\n    \"invoiceId\": \"{{invoiceId}}\",\n    \"orderId\": null\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/get-invoice-info",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"get-invoice-info"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.17.10"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/7.4.16"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 09:06:44 GMT"
+										},
+										{
+											"key": "Link",
+											"value": "<http://bb.test/docs/docs.jsonld>; rel=\"http://www.w3.org/ns/hydra/core#apiDocumentation\""
+										},
+										{
+											"key": "X-Debug-Token",
+											"value": "f4d16d"
+										},
+										{
+											"key": "X-Debug-Token-Link",
+											"value": "http://bb.test/_profiler/f4d16d"
+										},
+										{
+											"key": "X-Robots-Tag",
+											"value": "noindex"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"list\": [\n        {\n            \"createdAt\": \"2021-04-08 12:27:53\",\n            \"dateLife\": \"2021-04-08 03:00:00\",\n            \"merchantId\": \"2081075523\",\n            \"merchantName\": \"Test Belize merchant\",\n            \"invoiceId\": \"301169842533\",\n            \"parentId\": null,\n            \"invoiceType\": 1,\n            \"orderId\": \"4w44ds5r90\",\n            \"amount\": 1000,\n            \"amountFee\": 0,\n            \"currency\": \"BZD\",\n            \"currencyMask\": \"$\",\n            \"description\": \"Test invoice\",\n            \"statusPay\": 2,\n            \"statusPayName\": \"canceled\",\n            \"payeePaymentId\": null,\n            \"payeePaymentName\": null,\n            \"userPayeeId\": null,\n            \"payeeMobile\": null,\n            \"payeeFirstName\": null,\n            \"payeeLastName\": null,\n            \"userPayerId\": \"746088003\",\n            \"payerMobile\": \"380777777771\",\n            \"payerFirstName\": null,\n            \"payerLastName\": null,\n            \"receipt\": null,\n            \"fieldsOther\": null,\n            \"fieldsApp\": null,\n            \"transactions\": null\n        }\n    ],\n    \"page\": 1,\n    \"rows\": 10,\n    \"count\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "ChangePin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    var response = pm.response.json();",
+											"    if(typeof response.session !== 'undefined') {",
+											"        pm.environment.set(\"pos_session\", response.session);",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwtToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{LANG}}"
+									},
+									{
+										"key": "The-Timezone-IANA",
+										"type": "text",
+										"value": "{{TimeZone}}"
+									},
+									{
+										"key": "WL",
+										"type": "text",
+										"value": "{{WL}}"
+									},
+									{
+										"key": "IMEI",
+										"type": "text",
+										"value": "{{IMEI}}"
+									},
+									{
+										"key": "appVersion",
+										"type": "text",
+										"value": "{{VERMOB}}"
+									},
+									{
+										"key": "operatingSystem",
+										"type": "text",
+										"value": "{{OS}}"
+									},
+									{
+										"key": "SID",
+										"value": "{{sid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"personnelId\": \"78852455348473574800351155212149\",\n    \"pinHash\": \"{{pin_hash}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/change-pin",
+									"host": [
+										"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+									],
+									"path": [
+										"change-pin"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ChangePin",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept-Language",
+												"type": "text",
+												"value": "{{LANG}}"
+											},
+											{
+												"key": "The-Timezone-IANA",
+												"type": "text",
+												"value": "{{TimeZone}}"
+											},
+											{
+												"key": "WL",
+												"type": "text",
+												"value": "{{WL}}"
+											},
+											{
+												"key": "IMEI",
+												"type": "text",
+												"value": "{{IMEI}}"
+											},
+											{
+												"key": "appVersion",
+												"type": "text",
+												"value": "{{VERMOB}}"
+											},
+											{
+												"key": "operatingSystem",
+												"type": "text",
+												"value": "{{OS}}"
+											},
+											{
+												"key": "SID",
+												"value": "{{sid}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"personnelId\": \"78852455348473574800351155212149\",\n    \"pinHash\": \"{{pin_hash}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DOMAIN_LOCAL}}{{URLQRPOS}}/change-pin",
+											"host": [
+												"{{DOMAIN_LOCAL}}{{URLQRPOS}}"
+											],
+											"path": [
+												"change-pin"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.18.0 (Ubuntu)"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 Apr 2021 10:23:32 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-store, no-cache, must-revalidate, max-age=0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "post-check=0, pre-check=0"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, HEAD, OPTIONS, POST"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Accept-Language, The-Timezone-IANA, Authorization, Access-Control-Allow-Headers, X-Requested-With, WL, IMEI, SID, appVersion, operatingSystem"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer-when-downgrade"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src * data: 'unsafe-eval' 'unsafe-inline'"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if(typeof request.data !== 'undefined') {",
+							"    console.log(request.data);",
+							"try {",
+							"    data = JSON.parse(request.data);",
+							"\t",
+							"\tif(typeof data.invoiceId !== 'undefined') {",
+							"\t    data.invoiceId = pm.environment.get(\"invoiceId\");",
+							"\t}",
+							"\t",
+							"\tif(typeof data.transId !== 'undefined') {",
+							"\t    data.transId = pm.environment.get(\"transId\");",
+							"\t}",
+							"",
+							"\tif(typeof data.mobile !== 'undefined') {",
+							"\t    data.mobile = pm.environment.get(\"mobile\");",
+							"\t}",
+							"\t",
+							"\tif(typeof data.currency !== 'undefined') {",
+							"\t    data.currency = pm.environment.get(\"currency\");",
+							"\t}",
+							"",
+							"    if(typeof data.pinHash !== 'undefined') {",
+							"\t    let pin_hash = CryptoJS.SHA256(CryptoJS.MD5(pm.variables.get('pin')).toString()).toString();",
+							"\t    data.pinHash = pin_hash;",
+							"\t    postman.setEnvironmentVariable('pin_hash', pin_hash);",
+							"\t}",
+							"",
+							"    var header = {",
+							"        \"alg\": \"HS256\",",
+							"        \"typ\": \"JWT\"",
+							"    };",
+							"",
+							"    var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));",
+							"    var encodedHeader = CryptoJS.enc.Base64.stringify(stringifiedHeader);",
+							"",
+							"    var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));",
+							"    var encodedData = CryptoJS.enc.Base64.stringify(stringifiedData);",
+							"",
+							"    var token = encodedHeader + \".\" + encodedData;",
+							"",
+							"    var signature = CryptoJS.HmacSHA256(token, pm.variables.get('cryptoKeyMobileApp'));",
+							"        signature = CryptoJS.enc.Base64.stringify(signature);",
+							"",
+							"    var jwtToken = token + \".\" + signature;",
+							"    \t",
+							"\tpostman.setEnvironmentVariable('jwtToken', jwtToken);",
+							"    ",
+							"    console.log(JSON.stringify(data));",
+							"    console.log('jwtToken: ' + jwtToken);",
+							"    console.log('KEY: ' + pm.variables.get('cryptoKeyMobileApp'));",
+							"",
+							"    } catch (objError) {",
+							"    if (objError instanceof SyntaxError) {",
+							"        console.error(objError.name);",
+							"    } else {",
+							"        console.error(objError.message);",
+							"    }",
+							"}",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
