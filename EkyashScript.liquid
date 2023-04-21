@@ -21,7 +21,7 @@
     {% assign digiWalletLogo = "https://www.e-kyash.com/wp-content/uploads/2021/02/Site-logo-2-1.png" %}
     {% assign orderAmount = order.total_price | money_without_currency %}
     {% assign orderNumber = order.order_number %}
-    {% assign orderItems = order.line_items %}
+    {% assign orderItems = order.line_items | json %}
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700 &display=swap");
@@ -209,7 +209,10 @@
 
         <!-- MOBILE PAGE SECTION -->
         <div id="mobilePage">
-          <h1>MOBILE PAGE</h1>
+          <h1>if mobile just use the hardlink, but how do iget user to press it,
+            either way i need to
+                                                                        1. make the invoice creation function
+          </h1>
         </div>
         <!-- END OF SECTION-->
 
@@ -255,7 +258,11 @@
     </div>
 
     <script>
-      var sessionID = "";
+      var invoiceId = '';
+      var qrUrl = '';
+      var qrData = '';
+      var receiptUrl = '';
+      var paymentLink = '';
 
 //    Checks to see if the server is running, if yes then it will intialize the client with a session ID 
 //    else it will display that the server is unresponsive
@@ -298,12 +305,70 @@
             }
           }
         }
-
         if (isMobile) {
           document.getElementById("mobilePage").style.display = "block";
         } else {
           document.getElementById("desktopPage").style.display = "block";
+          createNewInvoice();
         }
+      }
+
+//    API call to /create-new-invoice
+      function createNewInvoice() {
+        var price = {{orderAmount}} * 100;
+        var itemsNote = getItemsNote();
+
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          "session": sessionID,
+          "orderId": {{orderNumber}},
+          "amount": price,
+          "currency": "BZD",
+          "description": itemsNote,
+          "payer": null,
+          "longTerm": null,
+          "receipt": null,
+          "dateLife": null,
+          "fieldsOther": null,
+          "fieldsApp": null
+        });
+
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+
+        fetch("https://proxy.gs-com.bz/create-new-invoice", requestOptions).then(response => response.json()).then(result => {
+          invoiceId = result.invoiceId;
+          qrUrl = result.qrUrl;
+          qrData = result.qrData;
+          receiptUrl = result.receiptUrl;
+          paymentLink = result.paymentLink;
+        }).catch(error => console.log('error', error));
+      }
+
+//    Gets the items from shopify and converts it into a string
+      function getItemsNote() {
+        var itemsArray = JSON.parse('{{ orderItems }}');
+        const orderItemsString = itemsArray.reduce((accumulator, item, index) => {
+          const itemString = `(${
+            item.quantity
+          }) ${
+            item.title
+          }`;
+          if (index === itemsArray.length - 1) {
+            return accumulator + itemString;
+          } else {
+            return accumulator + itemString + ',\n';
+          }
+        }, '');
+        const itemsNote = `GS-COM Web Order:\n${orderItemsString}`;
+        return itemsNote;
       }
 
 //    Display Payment Declined Page      
@@ -313,10 +378,7 @@
 
 //    Display Payment Success Page
       function displayPaymentSuccess() {
-        var f = document.getElementById("veriTacInputPage");
-        var g = document.getElementById("successPaymentPage");
-        f.style.display = "none";
-        g.style.display = "block";
+        document.getElementById("successPaymentPage").style.display = "block";
 
         setTimeout(() => {
           var appframe = document.querySelector('#appframe');
