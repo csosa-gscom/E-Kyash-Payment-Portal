@@ -209,8 +209,7 @@
 
         <!-- MOBILE PAGE SECTION -->
         <div id="mobilePage">
-          <h1>MOBILE PAGE
-          </h1>
+          <h1>MOBILE PAGE</h1>
         </div>
         <!-- END OF SECTION-->
 
@@ -261,7 +260,8 @@
       var qrUrl = '';
       var qrData = '';
       var receiptUrl = '';
-      var paymentLink = '';
+      var paymentLink = 'placeholder';
+      var isMobile = false;
 
 //    Checks to see if the server is running, if yes then it will intialize the client with a session ID 
 //    else it will display that the server is unresponsive
@@ -284,7 +284,6 @@
 
 //    Checks if the user is using a mobile device or desktop and displays the appropriate pages
       function checkMobile() {
-        var isMobile = false;
         var screenWidth = window.screen.width;
 
         if (screenWidth < 768) {
@@ -305,7 +304,7 @@
           }
         }
         if (isMobile) {
-          document.getElementById("mobilePage").style.display = "block";
+          runMobile();
         } else {
           document.getElementById("desktopPage").style.display = "block";
         }
@@ -313,10 +312,8 @@
 
       function runMobile() {
         document.getElementById("mobilePage").style.display = "block";
+        createNewInvoice();
 
-// createNewInvoice().then(result => {
-// console.log(paymentLink);
-// });
       }
 
 //    API call to /create-new-invoice
@@ -350,14 +347,19 @@
         };
 
         fetch("https://proxy.gs-com.bz/create-new-invoice", requestOptions).then(response => response.json()).then(result => {
-          invoiceId = result.invoiceId;
-          qrUrl = result.qrUrl;
-          qrData = result.qrData;
-          receiptUrl = result.receiptUrl;
-          paymentLink = result.paymentLink;
-          return result;
+          if (isMobile) {
+            getPaymentLink(result);
+          }
+
         }).catch(error => console.log('error', error));
       }
+
+      function getPaymentLink(data) {
+        paymentLink = data.paymentLink;
+        console.log('LINK: ', paymentLink)
+      }
+
+
 
 //    Gets the items from shopify and converts it into a string
       function getItemsNote() {
