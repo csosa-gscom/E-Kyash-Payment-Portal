@@ -209,9 +209,7 @@
 
         <!-- MOBILE PAGE SECTION -->
         <div id="mobilePage">
-          <h1>if mobile just use the hardlink, but how do iget user to press it,
-            either way i need to
-                                                                        1. make the invoice creation function
+          <h1>MOBILE PAGE
           </h1>
         </div>
         <!-- END OF SECTION-->
@@ -258,6 +256,7 @@
     </div>
 
     <script>
+      var sessionID = '';
       var invoiceId = '';
       var qrUrl = '';
       var qrData = '';
@@ -309,8 +308,15 @@
           document.getElementById("mobilePage").style.display = "block";
         } else {
           document.getElementById("desktopPage").style.display = "block";
-          createNewInvoice();
         }
+      }
+
+      function runMobile() {
+        document.getElementById("mobilePage").style.display = "block";
+
+// createNewInvoice().then(result => {
+// console.log(paymentLink);
+// });
       }
 
 //    API call to /create-new-invoice
@@ -349,6 +355,7 @@
           qrData = result.qrData;
           receiptUrl = result.receiptUrl;
           paymentLink = result.paymentLink;
+          return result;
         }).catch(error => console.log('error', error));
       }
 
