@@ -54,7 +54,7 @@
         display: none !important;
       }
 
-      :where(#declinedPaymentPage, #successPaymentPage, #mobilePage, #desktopPage, #serverUnresponsivePage, .section__content) {
+      :where(#declinedPaymentPage, #successPaymentPage, #mobilePage, #desktopPage, #serverUnresponsivePage, #qrCode, .section__content) {
         display: none;
       }
 
@@ -166,6 +166,30 @@
         animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
       }
 
+      .qrImage {
+        padding: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        border-width: 2px;
+        border-color: rgba(255, 255, 255, 0.05);
+        border-top-color: #26bdf5;
+        animation: spin 1s infinite linear;
+        border-radius: 100%;
+        border-style: solid;
+      }
+
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
       @keyframes stroke {
         100% {
           stroke-dashoffset: 0;
@@ -213,9 +237,21 @@
         </div>
         <!-- END OF SECTION-->
 
-        <!-- INPUT TELEPHONE NUMBER SECTION-->
-        <div id="desktopPage">
-          <h1>DESKTOP PAGE</h1>
+        <!-- DESKTOP PAGE SECTION-->
+
+        <div class="qrImage" id="desktopPage">
+          <div id="spinner" style="text-align: center;">
+            <span class="spinner"></span>
+          </div>
+          <div id="qrCode">
+            <img
+              id="qr"
+              src=""
+              alt="QR Code"
+              width="185"
+              height="auto">
+          </div>
+          <h1 class="space-content" style="font-weight: 900; text-align: center;">Scan to Pay</h1>
         </div>
         <!-- END OF SECTION-->
 
@@ -263,7 +299,7 @@
       var paymentLink = 'placeholder';
       var isMobile = false;
 
-//    Checks to see if the server is running, if yes then it will intialize the client with a session ID 
+//    Checks to see if the server is running, if yes then it will intialize the client with a session ID
 //    else it will display that the server is unresponsive
       var requestOptions = {
         method: 'GET',
@@ -306,7 +342,7 @@
         if (isMobile) {
           runMobile();
         } else {
-          document.getElementById("desktopPage").style.display = "block";
+          runDesktop();
         }
       }
 
@@ -314,6 +350,11 @@
         document.getElementById("mobilePage").style.display = "block";
         createNewInvoice();
 
+      }
+
+      function runDesktop() {
+        document.getElementById("desktopPage").style.display = "block";
+        createNewInvoice();
       }
 
 //    API call to /create-new-invoice
@@ -327,7 +368,7 @@
 
         var raw = JSON.stringify({
           "session": sessionID,
-          "orderId": {{orderNumber}},
+          "orderId": 110,
           "amount": price,
           "currency": "BZD",
           "description": itemsNote,
@@ -349,6 +390,8 @@
         fetch("https://proxy.gs-com.bz/create-new-invoice", requestOptions).then(response => response.json()).then(result => {
           if (isMobile) {
             getPaymentLink(result);
+          } else {
+            getQRCode(result);
           }
 
         }).catch(error => console.log('error', error));
@@ -357,6 +400,14 @@
       function getPaymentLink(data) {
         paymentLink = data.paymentLink;
         console.log('LINK: ', paymentLink)
+      }
+
+      function getQRCode(data) {
+        qrUrl = data.qrUrl;
+        document.getElementById("spinner").style.display = "none";
+        document.getElementById("qrCode").style.display = "block";
+        document.getElementById("qr").src = qrUrl;
+        console.log('QR URL: ', qrUrl)
       }
 
 
@@ -380,7 +431,7 @@
         return itemsNote;
       }
 
-//    Display Payment Declined Page      
+//    Display Payment Declined Page
       function displayPaymentDeclined() {
         document.getElementById("declinedPaymentPage").style.display = "block"
       }
