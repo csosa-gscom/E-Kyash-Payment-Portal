@@ -233,7 +233,17 @@
 
         <!-- MOBILE PAGE SECTION -->
         <div id="mobilePage">
-          <h1>MOBILE PAGE</h1>
+          <h1>MOBILE PHONE WITH NOTIFICATION VECTOR</h1>
+          <p>BIG BOLD Open the E-kyash notification on your phone</p>
+          <P>E-kyash sent you a a payment request to your app. Tap the notification to go to the app.</P>
+          <p>
+            button to resend notifc to user by using link again. thus this is a button
+          </p>
+          <p>
+            what needs to get done, after sending the user back i need a function that waits for a reply, ekyash will send this
+          </p>
+          <p>
+            nut what if t</p>
         </div>
         <!-- END OF SECTION-->
 
@@ -307,7 +317,7 @@
       };
 
       fetch("https://proxy.gs-com.bz/authorization", requestOptions).then(response => response.json()).then(result => {
-        sessionID = result.session;
+        createNewInvoice(result);
         checkMobile();
       }).catch(error => {
         console.log('error', error);
@@ -348,7 +358,7 @@
 
       function runMobile() {
         document.getElementById("mobilePage").style.display = "block";
-        createNewInvoice();
+
 
       }
 
@@ -358,7 +368,8 @@
       }
 
 //    API call to /create-new-invoice
-      function createNewInvoice() {
+      function createNewInvoice(data) {
+        sessionID = data.session;
         var price = {{orderAmount}} * 100;
         var itemsNote = getItemsNote();
 
@@ -398,8 +409,11 @@
       }
 
       function getPaymentLink(data) {
-        paymentLink = data.paymentLink;
-        console.log('LINK: ', paymentLink)
+        console.log('LINK: ', data.paymentLink)
+        window.open(data.paymentLink, "_blank");
+
+// display new page with waiting for payment
+// call function here waiting for callback to see if payment made, if it is hide all pages and display payment success page.
       }
 
       function getQRCode(data) {
